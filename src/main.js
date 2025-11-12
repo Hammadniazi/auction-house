@@ -5,5 +5,3 @@ document.querySelector("#app").innerHTML = `
     Hllo Vite + TailwindCSS!
   </div>
 `;
-
-setupCounter(document.querySelector("#counter"));
