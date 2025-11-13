@@ -1,4 +1,4 @@
-import "./style.css";
+import "./styles/style.css";
 
 document.querySelector("#app").innerHTML = `
   <div class = "bg-blue-500">

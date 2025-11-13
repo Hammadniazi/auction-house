@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Auction House</title>
+    <link rel="stylesheet" href="/src/styles/style.css" />
+    <script type="module" src="/src/js/pages/login.js" defer></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Navigation -->
+    <div id="main-nav"></div>
+    <!-- Login Form -->
+    <main class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md md:max-w-lg w-full space-y-8">
+        <div>
+          <h2
+            class="mt-2 text-center text-3xl font-extrabold text-gray-900 dark:text-white"
+          >
+            Sign in to your account
+          </h2>
+          <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            Or
+            <a
+              href="/pages/register.html"
+              class="font-medium text-primary-600 dark:text-primary-400 hover:text-primary-500"
+              >Create a new account</a
+            >
+          </p>
+        </div>
+
+        <div
+          class="bg-white dark:bg-gray-800 py-8 px-4 shadow-lg rounded-lg sm:px-10"
+        >
+          <div id="error-container"></div>
+
+          <form id="login-form" class="space-y-6">
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                class="input-field mt-1"
+                placeholder="abc@stud.noroff.no"
+              />
+              <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                Must end with @stud.noroff.no
+              </p>
+            </div>
+
+            <div>
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+                class="input-field mt-1"
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" id="submit-btn" class="w-full btn-primary">
+                Sign in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
