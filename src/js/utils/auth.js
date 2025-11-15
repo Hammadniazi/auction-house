@@ -21,6 +21,15 @@ export function getUser() {
 export function removeUser() {
   localStorage.removeItem(STORTAGE_KEYS.USER);
 }
+// Check if the user is authenticated
 export function isAuthenticated() {
   return !!getToken();
+}
+
+// Log out the user
+
+export function logout() {
+  removeToken();
+  removeUser();
+  window.location.href = "/index.html";
 }
