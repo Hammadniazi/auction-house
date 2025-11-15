@@ -1,20 +1,26 @@
-import { renderNavigartion } from "../components/navigation";
+import { renderNavigation } from "../components/navigation.js";
 import { authAPI } from "../api/api.js";
-import { setToken, setUser } from "../utils/auth.js";
+import { setToken, setUser, isAuthenticated } from "../utils/auth.js";
 import { validateEmail } from "../utils/helpers.js";
-import { showError } from "../utils/helpers.js";
+import {
+  showError,
+  clearMessages,
+  showLoading,
+  hideLoading,
+} from "../utils/helpers.js";
 
-renderNavigartion();
+renderNavigation();
 
-/* if (isAuthenticated()) {
+if (isAuthenticated()) {
   window.location.href = "/index.html";
-} */
+}
 
 const loginForm = document.getElementById("login-form");
-// const submitBtn = document.getElementById("submit-btn");
+const submitBtn = document.getElementById("submit-btn");
 
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  clearMessages();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
 
@@ -23,7 +29,7 @@ loginForm.addEventListener("submit", async (e) => {
     return;
   }
   try {
-    // showLoading(submitBtn, "Signing In...");
+    showLoading(submitBtn, "Signing In...");
 
     const response = await authAPI.login({ email, password });
     if (response.data) {
@@ -39,7 +45,8 @@ loginForm.addEventListener("submit", async (e) => {
       window.location.href = "/index.html";
     }
   } catch (error) {
-    // hideLoading(submitBtn);
     showError(error.message || "Login failed. Please check your credentials.");
+  } finally {
+    hideLoading(submitBtn);
   }
 });

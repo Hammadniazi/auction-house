@@ -1,3 +1,3 @@
-import { renderNavigartion } from "../components/navigation";
+import { renderNavigation } from "../components/navigation";
 
-renderNavigartion();
+renderNavigation();

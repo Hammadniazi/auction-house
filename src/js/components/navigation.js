@@ -1,7 +1,10 @@
-const nav = document.getElementById("main-nav");
+import { isAuthenticated, logout } from "../utils/auth.js";
 
-export function renderNavigartion() {
-  const isLoggedIn = localStorage.getItem("token") !== null;
+export function renderNavigation() {
+  const nav = document.getElementById("main-nav");
+  if (!nav) return;
+
+  const isLoggedIn = isAuthenticated();
 
   nav.innerHTML = `
 <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 transition-colors z-50">
@@ -50,7 +53,99 @@ export function renderNavigartion() {
             `
             }
           </div>
+          <!-- Mobile menu button -->
+          <div class="flex md:hidden items-center space-x-2">
+            <div id="dark-mode-toggle-container-mobile"></div>
+            <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <!-- Hamburger icon -->
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+       <!-- Mobile menu (hidden by default) -->
+      <div id="mobile-menu" class="hidden md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="/index.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium transition">
+            Home
+          </a>
+          
+          ${
+            isLoggedIn
+              ? `
+            <a href="/pages/create-listing.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium transition">
+              Create Listing
+            </a>
+            <a href="/pages/profile.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium transition">
+              Profile
+            </a>
+            <div class="flex items-center bg-primary-50 dark:bg-primary-900/30 px-3 py-2 rounded-md mx-3 my-2">
+              <i class="fas fa-coins text-lg text-primary-600 dark:text-primary-400 mr-2"></i>
+              <span class="text-primary-900 dark:text-primary-100 font-semibold" id="user-credits-mobile">Loading...</span>
+            </div>
+            <button id="logout-btn-mobile" class="w-full text-left bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-base font-medium transition mx-3">
+              Logout
+            </button>
+          `
+              : `
+            <a href="/pages/login.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium transition">
+              Login
+            </a>
+            <a href="/pages/register.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium transition">
+              Register
+            </a>
+          `
+          }
+        </div>
+      </div>
     </div>
 
 `;
+
+  //  Add logout event listener
+
+  if (isLoggedIn) {
+    const logoutBtn = document.getElementById("logout-btn");
+    const logoutBtnMobile = document.getElementById("logout-btn-mobile");
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        logout();
+      });
+    }
+
+    if (logoutBtnMobile) {
+      const logoutBtnMobile = document.getElementById("logout-btn-mobile");
+      logoutBtnMobile.addEventListener("click", () => {
+        logout();
+      });
+    }
+  }
+
+  // Mobile menu toggle functionality
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener("click", () => {
+      const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+      const icon = mobileMenuBtn.querySelector("i");
+
+      if (isExpanded) {
+        // Close menu
+        mobileMenu.classList.add("hidden");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
+      } else {
+        // Open menu
+        mobileMenu.classList.remove("hidden");
+        mobileMenuBtn.setAttribute("aria-expanded", "true");
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
+      }
+    });
+  }
 }
