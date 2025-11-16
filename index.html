@@ -15,7 +15,33 @@
     <!-- Navigation -->
     <div id="main-nav"></div>
     <!-- Hero Section -->
-    <section></section>
+    <section
+      class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:mask-b-to-primary-900 text-white py-12 sm:py-16 md:py-20"
+    >
+      <div class="text-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Welcome to Auction House
+        </h1>
+        <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8">
+          Discover amazing items and place your bids
+        </p>
+      </div>
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative flex flex-col sm:flex-row gap-2">
+          <input
+            type="text"
+            placeholder="Search for listings..."
+            class="flex-1 w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg text-shadow-gray-800 dark:text-white dark:bg-gray-700 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-300"
+          />
+          <button
+            id="search-btn"
+            class="btn-primary sm:absolute sm:right-2 sm:top-2"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </section>
     <!-- Main Content -->
     <main></main>
     <!-- Footer -->
