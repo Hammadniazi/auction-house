@@ -1,4 +1,4 @@
-import { API_AUTH_URL } from "../config/constants.js";
+import { API_AUTH_URL, API_AUCTION_URL } from "../config/constants.js";
 import { getToken } from "../utils/auth.js";
 
 /**
@@ -55,5 +55,14 @@ export const authAPI = {
       method: "POST",
       body: JSON.stringify(credentials),
     });
+  },
+};
+
+//  Listing API calls
+
+export const listingAPI = {
+  getAllListings: async (params = {}) => {
+    const queryParams = new URLSearchParams({ ...params });
+    return apiRequest(`${API_AUCTION_URL}/listings?${queryParams}`);
   },
 };
