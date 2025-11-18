@@ -1,3 +1,4 @@
+// Validate email ends with @stud.noroff.no
 export function validateEmail(email) {
   return email.endsWith("@stud.noroff.no");
 }
@@ -58,4 +59,51 @@ export function showSuccess(message, containerId = "error-container") {
       `;
     container.scrollIntoView({ behavior: "smooth", block: "center" });
   }
+}
+
+// Calculate time remaining
+export function getTimeRemaining(endDate) {
+  const total = Date.parse(endDate) - Date.parse(new Date());
+  const seconds = Math.floor((total / 1000) % 60);
+  const minutes = Math.floor((total / 1000 / 60) % 60);
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+  return {
+    total,
+    days,
+    hours,
+    minutes,
+    seconds,
+    isExpired: total <= 0,
+  };
+}
+
+//  Format time remaining as string
+
+export function formatTimeRemaining(endDate) {
+  const time = getTimeRemaining(endDate);
+
+  if (time.isExpired) {
+    return "Aution Ended";
+  }
+  if (time.days > 0) {
+    return `${time.days}d ${time.hours}h`;
+  }
+  if (time.hours > 0) {
+    return `${time.hours}h ${time.minutes}m`;
+  }
+  return `${time.minutes}m ${time.seconds}s`;
+}
+
+// Get highest bids array
+export function getHighestBid(bids) {
+  if (!bids || bids.length === 0) return 0;
+  return Math.max(...bids.map((bid) => bid.amount));
+}
+
+// Truncate text
+export function truncateText(text, maxLength = 100) {
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength) + "...";
 }
