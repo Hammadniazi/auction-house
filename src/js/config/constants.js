@@ -6,6 +6,7 @@ export const API_AUCTION_URL = `${API_BASE_URL}/auction`;
 export const STORTAGE_KEYS = {
   TOKEN: "auction_token",
   USER: "auction_user",
+  API_KEY: "auction_api_key",
 };
 
 // Email validation

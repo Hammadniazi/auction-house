@@ -1,4 +1,5 @@
-import { isAuthenticated, logout } from "../utils/auth.js";
+import { isAuthenticated, getUser, logout } from "../utils/auth.js";
+import { profileAPI } from "../api/api.js";
 
 export function renderNavigation() {
   const nav = document.getElementById("main-nav");
@@ -122,6 +123,8 @@ export function renderNavigation() {
         logout();
       });
     }
+    // Load and display user credits
+    updateUserCredits();
   }
 
   // Mobile menu toggle functionality
@@ -147,5 +150,38 @@ export function renderNavigation() {
         icon.classList.add("fa-times");
       }
     });
+  }
+}
+
+//  Update user credits in the navigation
+
+export async function updateUserCredits() {
+  const creditsElement = document.getElementById("user-credits");
+  const creditsElementMobile = document.getElementById("user-credits-mobile");
+
+  try {
+    const user = getUser();
+    if (user && user.name) {
+      const profileData = await profileAPI.getProfile(user.name);
+      const credits = profileData.data?.credits ?? 0;
+      const creditsText = `${credits} Credits`;
+      if (creditsElement) {
+        creditsElement.textContent = creditsText;
+      }
+      if (creditsElementMobile) {
+        creditsElementMobile.textContent = creditsText;
+      }
+      // Update user in local storage with latest credits
+      const updatedUser = { ...user, credits };
+      localStorage.setItem("auction_user", JSON.stringify(updatedUser));
+    }
+  } catch (error) {
+    console.error("Error fetching credits:", error);
+    if (creditsElement) {
+      creditsElement.textContent = "0 Credits";
+    }
+    if (creditsElementMobile) {
+      creditsElementMobile.textContent = "0 Credits";
+    }
   }
 }
