@@ -1,6 +1,11 @@
 import { renderNavigation } from "../components/navigation.js";
 import { authAPI } from "../api/api.js";
-import { setToken, setUser, isAuthenticated } from "../utils/auth.js";
+import {
+  setToken,
+  setUser,
+  setApiKey,
+  isAuthenticated,
+} from "../utils/auth.js";
 import { validateEmail } from "../utils/helpers.js";
 import {
   showError,
@@ -41,6 +46,14 @@ loginForm.addEventListener("submit", async (e) => {
         banner: response.data.banner,
         credits: response.data.credits || 1000,
       });
+      try {
+        const apiKeyResponse = await authAPI.createApiKey();
+        if (apiKeyResponse.data && apiKeyResponse.data.key) {
+          setApiKey(apiKeyResponse.data.key);
+        }
+      } catch (apiKeyError) {
+        console.error("Failed to create API key:", apiKeyError);
+      }
 
       window.location.href = "/index.html";
     }
