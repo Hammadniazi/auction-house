@@ -182,5 +182,141 @@
         </div>
       </div>
     </main>
+
+    <!--  Edit Profile Modal -->
+    <div
+      id="edit-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+    >
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white">
+            Edit Profile
+          </h3>
+          <button
+            id="close-modal-btn"
+            class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div id="modal-error-container"></div>
+
+        <form id="edit-profile-form" class="space-y-6">
+          <div>
+            <label
+              for="bio"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Bio</label
+            >
+            <textarea
+              id="bio"
+              name="bio"
+              rows="4"
+              class="input-field"
+              placeholder="Tell us about yourself..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              for="avatar-url"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Avatar URL</label
+            >
+            <input
+              type="url"
+              id="avatar-url"
+              name="avatar-url"
+              class="input-field"
+              placeholder="https://example.com/avatar.jpg"
+            />
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Enter a valid image URL
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="avatar-alt"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Avatar Alt Text</label
+            >
+            <input
+              type="text"
+              id="avatar-alt"
+              name="avatar-alt"
+              class="input-field"
+              placeholder="Description of your avatar"
+            />
+          </div>
+
+          <div>
+            <label
+              for="banner-url"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Banner URL</label
+            >
+            <input
+              type="url"
+              id="banner-url"
+              name="banner-url"
+              class="input-field"
+              placeholder="https://example.com/banner.jpg"
+            />
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Enter a valid image URL
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="banner-alt"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >Banner Alt Text</label
+            >
+            <input
+              type="text"
+              id="banner-alt"
+              name="banner-alt"
+              class="input-field"
+              placeholder="Description of your banner"
+            />
+          </div>
+
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              id="save-profile-btn"
+              class="flex-1 btn-primary"
+            >
+              Save Changes
+            </button>
+            <button
+              type="button"
+              id="cancel-modal-btn"
+              class="flex-1 btn-secondary"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
