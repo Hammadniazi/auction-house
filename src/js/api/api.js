@@ -77,6 +77,13 @@ export const listingAPI = {
     const queryParams = new URLSearchParams({ ...params });
     return apiRequest(`${API_AUCTION_URL}/listings?${queryParams}`);
   },
+
+  createListing: async (listingData) => {
+    return apiRequest(`${API_AUCTION_URL}/listings`, {
+      method: "POST",
+      body: JSON.stringify(listingData),
+    });
+  },
 };
 
 //  Profile API call
