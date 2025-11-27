@@ -84,6 +84,11 @@ export const listingAPI = {
       body: JSON.stringify(listingData),
     });
   },
+  getListing: async (id) => {
+    return apiRequest(
+      `${API_AUCTION_URL}/listings/${id}?_seller=true&_bids=true`,
+    );
+  },
 };
 
 //  Profile API call
@@ -96,5 +101,10 @@ export const profileAPI = {
       method: "PUT",
       body: JSON.stringify(data),
     });
+  },
+  getProfileListings: async (username) => {
+    return apiRequest(
+      `${API_AUCTION_URL}/profiles/${username}/listings?_bids=true&_seller=true`,
+    );
   },
 };

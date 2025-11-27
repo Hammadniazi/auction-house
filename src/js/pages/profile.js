@@ -1,4 +1,7 @@
-import { renderNavigation, updateUserCredits } from "../components/navigation";
+import {
+  renderNavigation,
+  updateUserCredits,
+} from "../components/navigation.js";
 import { requireAuth, getUser, setUser } from "../utils/auth.js";
 import { profileAPI } from "../api/api.js";
 import {
@@ -7,16 +10,21 @@ import {
   showLoading,
   showSuccess,
 } from "../utils/helpers.js";
+import { createListingCard } from "../components/listings.js";
 
+// Require authentication
 if (!requireAuth()) {
   throw new Error("Authentication required!");
 }
-
+//  Initiate Navigation
 renderNavigation();
 
 // State
 
 let userProfile = null;
+let userListings = [];
+
+//  Load user profile
 
 async function loadProfile() {
   const user = getUser();
@@ -71,6 +79,50 @@ async function loadProfile() {
   } catch (error) {
     console.error("Error loading profile:", error);
   }
+}
+
+// Load user listings
+async function loadUserListings() {
+  const user = getUser();
+  if (!user) return;
+  try {
+    const response = await profileAPI.getProfileListings(user.name);
+    userListings = response.data || [];
+    renderUserListings();
+  } catch (error) {
+    console.error("Error loading listings:", error);
+    document.getElementById("my-listings-container").innerHTML = `
+     <div class="col-span-full text-center py-12 text-gray-500">
+        Failed to load listings
+      </div>
+        `;
+  }
+}
+
+//    Render user listings
+
+function renderUserListings() {
+  const container = document.getElementById("my-listings-container");
+  if (userListings.length === 0) {
+    container.innerHtml = `
+        <div class="col-span-full text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No listings yet</h3>
+        <p class="mt-1 text-sm text-gray-500">Get started by creating a new listing</p>
+        <div class="mt-6">
+          <a href="/pages/create-listing.html" class="btn-primary">
+            Create Listing
+          </a>
+        </div>
+      </div>
+      `;
+    return;
+  }
+  container.innerHTML = userListings
+    .map((listing) => createListingCard(listing))
+    .join("");
 }
 
 //  Modal handling
@@ -147,3 +199,4 @@ document
 
 // Initial load
 loadProfile();
+loadUserListings();

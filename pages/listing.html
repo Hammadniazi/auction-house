@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listing - Auction House</title>
+    <link rel="stylesheet" href="/src//styles//style.css" />
+    <script type="module" src="/src/js/pages/listing.js" defer></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navigation -->
+    <div id="main-nav"></div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div id="error-container"></div>
+
+      <div id="listing-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Loading state -->
+        <div id="col-span-full text-center py-12">
+          <div
+            class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-400 mx-auto"
+          ></div>
+          <p class="mt-4 text-gray-600 dark:text-gray-400">
+            Loading listing...
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
