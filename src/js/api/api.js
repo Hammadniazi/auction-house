@@ -89,9 +89,20 @@ export const listingAPI = {
       `${API_AUCTION_URL}/listings/${id}?_seller=true&_bids=true`,
     );
   },
+  updateListing: async (id, listingData) => {
+    return apiRequest(`${API_AUCTION_URL}/listings/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(listingData),
+    });
+  },
+  deleteListing: async (id) => {
+    return apiRequest(`${API_AUCTION_URL}/listings/${id}`, {
+      method: "DELETE",
+    });
+  },
 };
 
-//  Profile API call
+//  Profile API calls
 export const profileAPI = {
   getProfile: async (username) => {
     return apiRequest(`${API_AUCTION_URL}/profiles/${username}`);
@@ -106,5 +117,15 @@ export const profileAPI = {
     return apiRequest(
       `${API_AUCTION_URL}/profiles/${username}/listings?_bids=true&_seller=true`,
     );
+  },
+};
+
+//  Bids API calls
+export const bidsAPI = {
+  placeBids: async (listingId, amount) => {
+    return apiRequest(`${API_AUCTION_URL}/listings/${listingId}/bids`, {
+      method: "POST",
+      body: JSON.stringify({ amount }),
+    });
   },
 };
