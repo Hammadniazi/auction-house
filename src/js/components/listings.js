@@ -92,3 +92,29 @@ export function renderListings(listings, containerId = "listings-container") {
     .map((listing) => createListingCard(listing))
     .join("");
 }
+
+//  Show loading skeleton
+export function showListingsLoading(containerId = "listings-container") {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const skeletons = Array(6)
+    .fill(0)
+    .map(
+      () => `
+      <div class="card animate-pulse">
+      <div class="bg-gray-300 h-48 w-full"></div>
+      <div class="p-4">
+        <div class="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+        <div class="h-3 bg-gray-300 rounded w-full mb-2"></div>
+        <div class="h-3 bg-gray-300 rounded w-2/3 mb-4"></div>
+        <div class="flex justify-between">
+          <div class="h-8 bg-gray-300 rounded w-1/3"></div>
+          <div class="h-8 bg-gray-300 rounded w-1/4"></div>
+        </div>
+      </div>
+    </div>
+        `,
+    )
+    .join("");
+  container.innerHTML = skeletons;
+}

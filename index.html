@@ -30,6 +30,7 @@
         <div class="relative flex flex-col sm:flex-row gap-2">
           <input
             type="text"
+            id="search-input"
             placeholder="Search for listings..."
             class="flex-1 w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg text-shadow-gray-800 dark:text-white dark:bg-gray-700 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-300"
           />
@@ -54,12 +55,13 @@
         </h2>
         <div class="w-full sm:w-auto">
           <select
-            id=" sort-select"
+            id="sort-select"
             class="w-full border border-gray-300 dark:border-gray-600 sm:w-auto px-4 py-2 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           >
-            <option value="">Newest First</option>
-            <option value="">Oldest First</option>
-            <option value="">Ending soon</option>
+            <option value="created-desc">Newest First</option>
+            <option value="created-asc">Oldest First</option>
+            <option value="ending-soon">Ending soon</option>
+            <option value="title-asc">Title A-Z</option>
           </select>
         </div>
       </div>
