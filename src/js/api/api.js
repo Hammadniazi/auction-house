@@ -100,6 +100,11 @@ export const listingAPI = {
       method: "DELETE",
     });
   },
+  searchListings: async (query) => {
+    return apiRequest(
+      `${API_AUCTION_URL}/listings/search?q=${encodeURIComponent(query)}&_seller=true&_bids=true`,
+    );
+  },
 };
 
 //  Profile API calls
