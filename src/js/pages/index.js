@@ -2,6 +2,13 @@ import { renderNavigation } from "../components/navigation";
 import { renderListings, showListingsLoading } from "../components/listings.js";
 import { listingAPI } from "../api/api.js";
 import { showError, clearMessages } from "../utils/helpers.js";
+import {
+  resetPagination,
+  setTotalItems,
+  getPageItems,
+  renderPagination,
+  onPageChange,
+} from "../components/pagination.js";
 
 // Initialize navigation
 renderNavigation();
@@ -28,7 +35,8 @@ async function loadListings() {
 
     console.log("All listings:", allListings);
     filteredListings = [...allListings];
-    renderListings(filteredListings);
+    resetPagination();
+    sortListings(currentSort);
   } catch (error) {
     console.error("Error loading listings: ", error);
     showError("Failed to load listings. Please try again.");
@@ -58,14 +66,28 @@ function sortListings(sortType) {
       filteredListings.sort((a, b) => a.title.localeCompare(b.title));
       break;
   }
-  renderListings(filteredListings);
+  resetPagination(); // Reset to first page when sorting
+  renderCurrentPage();
 }
+
+// Render current page with pagination
+function renderCurrentPage() {
+  setTotalItems(filteredListings.length);
+  const listingsToShow = getPageItems(filteredListings);
+
+  renderListings(listingsToShow);
+  renderPagination();
+}
+
+// Set up pagination callback
+onPageChange(() => {
+  renderCurrentPage();
+});
 
 //  Search listings
 async function searchListings(query) {
   if (!query.trim()) {
     filteredListings = [...allListings];
-    // renderListings(filteredListings);
     sortListings(currentSort);
     return;
   }
@@ -74,7 +96,7 @@ async function searchListings(query) {
   try {
     const response = await listingAPI.searchListings(query);
     filteredListings = response.data || [];
-    // renderListings(filteredListings);
+    resetPagination(); // Reset to first page on search
     sortListings(currentSort);
   } catch (error) {
     console.error("Error searching listings:", error);
@@ -84,7 +106,8 @@ async function searchListings(query) {
         listing.title.toLowerCase().includes(query.toLowerCase()) ||
         listing.description?.toLowerCase().includes(query.toLowerCase()),
     );
-    renderListings(filteredListings);
+    resetPagination();
+    renderCurrentPage();
   }
 }
 
