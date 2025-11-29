@@ -13,8 +13,12 @@ import {
   showLoading,
   hideLoading,
 } from "../utils/helpers.js";
+import { renderFooter } from "../components/footer.js";
 
 renderNavigation();
+
+// Initialize footer
+renderFooter();
 
 if (isAuthenticated()) {
   window.location.href = "/index.html";
