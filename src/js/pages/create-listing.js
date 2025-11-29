@@ -8,6 +8,7 @@ import {
   showLoading,
   hideLoading,
 } from "../utils/helpers";
+import { renderFooter } from "../components/footer.js";
 
 //  Require authentication
 if (!requireAuth()) {
@@ -15,6 +16,9 @@ if (!requireAuth()) {
 }
 // Initialize navigation
 renderNavigation();
+
+// Initialize footer
+renderFooter();
 
 // Set minimun date to current date/time
 const now = new Date();

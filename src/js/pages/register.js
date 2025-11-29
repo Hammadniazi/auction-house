@@ -8,6 +8,7 @@ import {
   showLoading,
   hideLoading,
 } from "../utils/helpers.js";
+import { renderFooter } from "../components/footer.js";
 
 // Redirect if already logged in
 if (isAuthenticated()) {
@@ -16,6 +17,8 @@ if (isAuthenticated()) {
 
 // Initialize navigation
 renderNavigation();
+// Initialize footer
+renderFooter();
 
 // Register form handling
 

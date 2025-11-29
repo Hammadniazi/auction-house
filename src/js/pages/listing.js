@@ -17,9 +17,12 @@ import {
   getTimeRemaining,
   formatTimeRemaining,
 } from "../utils/helpers.js";
+import { renderFooter } from "../components/footer.js";
 
 //  Initialize Navigation
 renderNavigation();
+// Initialize footer
+renderFooter();
 
 //  Get listings ID from URL
 const urlParams = new URLSearchParams(window.location.search);

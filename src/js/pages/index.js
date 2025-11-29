@@ -9,6 +9,7 @@ import {
   renderPagination,
   onPageChange,
 } from "../components/pagination.js";
+import { renderFooter } from "../components/footer.js";
 
 // Initialize navigation
 renderNavigation();
@@ -132,3 +133,5 @@ sortSelect.addEventListener("change", (e) => {
 });
 
 loadListings();
+// Initialize footer
+renderFooter();

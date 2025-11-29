@@ -11,6 +11,7 @@ import {
   showSuccess,
 } from "../utils/helpers.js";
 import { createListingCard } from "../components/listings.js";
+import { renderFooter } from "../components/footer.js";
 
 // Require authentication
 if (!requireAuth()) {
@@ -18,6 +19,8 @@ if (!requireAuth()) {
 }
 //  Initiate Navigation
 renderNavigation();
+// Initialize footer
+renderFooter();
 
 // State
 
