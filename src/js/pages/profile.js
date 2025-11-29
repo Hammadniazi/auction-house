@@ -9,9 +9,11 @@ import {
   showError,
   showLoading,
   showSuccess,
+  hideLoading,
 } from "../utils/helpers.js";
 import { createListingCard } from "../components/listings.js";
 import { renderFooter } from "../components/footer.js";
+import { getHighestBid, formatTimeRemaining } from "../utils/helpers.js";
 
 // Require authentication
 if (!requireAuth()) {
@@ -26,6 +28,7 @@ renderFooter();
 
 let userProfile = null;
 let userListings = [];
+let userBids = [];
 
 //  Load user profile
 
@@ -197,8 +200,159 @@ document
         error.message || "Failed to update profile.",
         "modal-error-container",
       );
+    } finally {
+      hideLoading(saveBtn);
     }
   });
+
+//  Load user bids
+async function loadUserBids() {
+  const user = getUser();
+  if (!user) return;
+
+  try {
+    const response = await profileAPI.getProfileBids(user.name);
+    userBids = response.data || [];
+    renderUserBids();
+  } catch (error) {
+    console.error("Error loading bids:", error);
+    document.getElementById("my-bids-container").innerHTML = `
+
+    <div class="col-span-full text-center py-12 text-gray-500">
+        Failed to load bids
+      </div>
+        
+        `;
+  }
+}
+
+//  Render user bids
+
+function renderUserBids() {
+  const container = document.getElementById("my-bids-container");
+
+  if (userBids.length === 0) {
+    container.innerHTML = `
+
+     <div class="col-span-full text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No bids yet</h3>
+        <p class="mt-1 text-sm text-gray-500">Start bidding on listings to see them here</p>
+        <div class="mt-6">
+          <a href="/index.html" class="btn-primary">
+            Browse Listings
+          </a>
+        </div>
+      </div>
+        `;
+    return;
+  }
+  container.innerHTML = userBids
+    .map((bid) => {
+      const listing = bid.listing;
+      if (!listing) return "";
+
+      const highestBid = getHighestBid(listing.bids);
+      const isWinning = bid.amount >= highestBid;
+      const imageUrl = listing.media?.[0]?.url || "";
+
+      return `
+    <div class="card cursor-pointer" onclick="window.location.href='/pages/listing.html?id=${
+      listing.id
+    }'">
+        <div class="relative">
+          ${
+            imageUrl
+              ? `<img src="${imageUrl}" alt="${listing.title}" class="w-full h-48 object-cover" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+              : ""
+          }
+          <div class="w-full h-48 bg-gray-200 dark:bg-gray-700 ${
+            imageUrl ? "hidden" : "flex"
+          } items-center justify-center">
+            <div class="text-center">
+              <i class="fas fa-image text-4xl text-gray-400 dark:text-gray-500 mb-2"></i>
+              <p class="text-sm text-gray-500 dark:text-gray-400">No Image</p>
+            </div>
+          </div>
+          ${
+            isWinning
+              ? '<div class="absolute top-2 right-2 badge-success">Winning</div>'
+              : '<div class="absolute top-2 right-2 badge-danger">Outbid</div>'
+          }
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 truncate">${
+            listing.title
+          }</h3>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-500 dark:text-gray-400">Your Bid:</span>
+              <span class="text-lg font-bold text-primary-600 dark:text-primary-400">${
+                bid.amount
+              } Credits</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-500 dark:text-gray-400">Highest Bid:</span>
+              <span class="text-lg font-bold ${
+                isWinning ? "text-green-600" : "text-red-600"
+              }">${highestBid} Credits</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-500">Time Left:</span>
+              <span class="text-sm font-semibold">${formatTimeRemaining(
+                listing.endsAt,
+              )}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    })
+    .join("");
+}
+
+// Tab switching
+
+document.getElementById("tab-listings").addEventListener("click", () => {
+  document
+    .getElementById("tab-listings")
+    .classList.add("active", "border-primary-600", "text-primary-600");
+  document
+    .getElementById("tab-listings")
+    .classList.remove("text-gray-500", "border-transparent");
+  document
+    .getElementById("tab-bids")
+    .classList.remove("active", "border-primary-600", "text-primary-600");
+  document
+    .getElementById("tab-bids")
+    .classList.add("text-gray-500", "border-transparent");
+
+  document.getElementById("listings-section").classList.remove("hidden");
+  document.getElementById("bids-section").classList.add("hidden");
+});
+
+document.getElementById("tab-bids").addEventListener("click", () => {
+  document
+    .getElementById("tab-bids")
+    .classList.add("active", "border-primary-600", "text-primary-600");
+  document
+    .getElementById("tab-bids")
+    .classList.remove("text-gray-500", "border-transparent");
+  document
+    .getElementById("tab-listings")
+    .classList.remove("active", "border-primary-600", "text-primary-600");
+  document
+    .getElementById("tab-listings")
+    .classList.add("text-gray-500", "border-transparent");
+  document.getElementById("bids-section").classList.remove("hidden");
+  document.getElementById("listings-section").classList.add("hidden");
+
+  if (userBids.length === 0) {
+    loadUserBids();
+  }
+});
 
 // Initial load
 loadProfile();

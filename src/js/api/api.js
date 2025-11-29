@@ -123,11 +123,16 @@ export const profileAPI = {
       `${API_AUCTION_URL}/profiles/${username}/listings?_bids=true&_seller=true`,
     );
   },
+  getProfileBids: async (username) => {
+    return apiRequest(
+      `${API_AUCTION_URL}/profiles/${username}/bids?_listings=true`,
+    );
+  },
 };
 
 //  Bids API calls
 export const bidsAPI = {
-  placeBids: async (listingId, amount) => {
+  placeBid: async (listingId, amount) => {
     return apiRequest(`${API_AUCTION_URL}/listings/${listingId}/bids`, {
       method: "POST",
       body: JSON.stringify({ amount }),
