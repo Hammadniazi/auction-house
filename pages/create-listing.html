@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Listing - Auction House</title>
+    <link rel="stylesheet" href="/src/styles/style.css" />
+    <script type="module" src="/src/js/pages/create-listing.js" defer></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navigation -->
+    <div id="main-nav"></div>
+
+    <!-- Main content -->
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+          Create New Listing
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">
+          Fill in the details to create your auction listing.
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+        <div id="error-container"></div>
+
+        <form id="create-listing-form" class="space-y-6">
+          <div>
+            <label
+              for="title"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Title <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              class="input-field"
+              placeholder="Enter a descriptive title for your item"
+            />
+          </div>
+          <div>
+            <label
+              for="description"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Description <span class="text-red-500">*</span>
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              rows="6"
+              required
+              class="input-field"
+              placeholder="Describe your items in details..."
+            ></textarea>
+          </div>
+
+          <div>
+            <label
+              for="endsAt"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Auction End Date <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="datetime-local"
+              name="endsAt"
+              id="endsAt"
+              required
+              class="input-field"
+            />
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Select when the auction should end.
+            </p>
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Media Gallery
+            </label>
+
+            <div id="media-container" class="space-y-4">
+              <div class="media-item flex space-x-2">
+                <input
+                  type="url"
+                  name="media-url-0"
+                  class="input-field flex-1"
+                  placeholder="Image URL"
+                />
+                <input
+                  type="text"
+                  name="media-alt-0"
+                  class="input-field flex-1"
+                  placeholder="Alt text (optional)"
+                />
+              </div>
+            </div>
+            <button
+              type="button"
+              id="add-media-btn"
+              class="mt-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium"
+            >
+              + Add another image
+            </button>
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Add up to 8 images
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="tags"
+              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            >
+              Tags (optional)
+            </label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              class="input-field"
+              placeholder="e.g., electronics, vintage, collectible (comma-separated)"
+            />
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Separate tags with commas
+            </p>
+          </div>
+
+          <div class="flex space-x-4 pt-6">
+            <button type="submit" id="submit-btn" class="flex-1 btn-primary">
+              Create Listing
+            </button>
+            <a
+              href="/pages/profile.html"
+              class="flex-1 btn-secondary text-center"
+            >
+              Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer id="footer"></footer>
+  </body>
+</html>

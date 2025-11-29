@@ -15,10 +15,67 @@
     <!-- Navigation -->
     <div id="main-nav"></div>
     <!-- Hero Section -->
-    <section></section>
+    <section
+      class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:mask-b-to-primary-900 text-white py-12 sm:py-16 md:py-20"
+    >
+      <div class="text-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Welcome to Auction House
+        </h1>
+        <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8">
+          Discover amazing items and place your bids
+        </p>
+      </div>
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative flex flex-col sm:flex-row gap-2">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search for listings..."
+            class="flex-1 w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg text-shadow-gray-800 dark:text-white dark:bg-gray-700 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-300"
+          />
+          <button
+            id="search-btn"
+            class="btn-primary sm:absolute sm:right-2 sm:top-2"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </section>
     <!-- Main Content -->
-    <main></main>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4"
+      >
+        <h2
+          class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white"
+        >
+          Active Listing
+        </h2>
+        <div class="w-full sm:w-auto">
+          <select
+            id="sort-select"
+            class="w-full border border-gray-300 dark:border-gray-600 sm:w-auto px-4 py-2 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+          >
+            <option value="created-desc">Newest First</option>
+            <option value="created-asc">Oldest First</option>
+            <option value="ending-soon">Ending soon</option>
+            <option value="title-asc">Title A-Z</option>
+          </select>
+        </div>
+      </div>
+      <div id="error-container"></div>
+      <div
+        id="listings-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      ></div>
+      <!-- Pagination -->
+      <div id="pagination" class="mt-12 flex justify-center space-x-2">
+        <!-- Pagination button will load here -->
+      </div>
+    </main>
     <!-- Footer -->
-    <footer></footer>
+    <footer id="footer"></footer>
   </body>
 </html>
