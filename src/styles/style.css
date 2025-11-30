@@ -65,7 +65,103 @@ body {
   }
 
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300;
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-in-out;
+  }
+  .card:hover {
+    @apply shadow-2xl -translate-y-0.5 scale-[1.02];
+  }
+
+  /* Listing card specific styles */
+  .listing-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-in-out cursor-pointer;
+  }
+
+  .listing-card:hover {
+    @apply shadow-2xl -translate-y-0.5 scale-[1.02];
+  }
+
+  /* Image container with overflow hidden for zoom effect */
+  .listing-card .image-container {
+    @apply relative overflow-hidden;
+  }
+
+  /* Image zoom on card hover */
+  .listing-card:hover .card-image {
+    @apply scale-110;
+  }
+
+  /* Smooth image transition */
+  .card-image {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  /* Fade-in animation for cards */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .listing-card {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  /* Stagger animation delay for multiple cards */
+  .listing-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .listing-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .listing-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .listing-card:nth-child(4) {
+    animation-delay: 0.15s;
+  }
+  .listing-card:nth-child(5) {
+    animation-delay: 0.25s;
+  }
+  .listing-card:nth-child(6) {
+    animation-delay: 0.35s;
+  }
+  /* Shimmer loading effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .skeleton-loading {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      to right,
+      #f3f4f6 0%,
+      #e5e7eb 20%,
+      #f3f4f6 40%,
+      #f3f4f6 100%
+    );
+    background-size: 1000px 100%;
+  }
+
+  .dark .skeleton-loading {
+    background: linear-gradient(
+      to right,
+      #374151 0%,
+      #4b5563 20%,
+      #374151 40%,
+      #374151 100%
+    );
+    background-size: 1000px 100%;
   }
 
   .badge-success {

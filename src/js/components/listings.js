@@ -15,13 +15,13 @@ export function createListingCard(listing) {
   const highestBid = getHighestBid(listing.bids);
 
   return `
-  <div class="card cursor-pointer" onclick="window.location.href='/pages/listing.html?id=${
+  <div class="listing-card" onclick="window.location.href='/pages/listing.html?id=${
     listing.id
   }'">
-      <div class="relative">
+      <div class="image-container relative">
         ${
           imageUrl
-            ? `<img src="${imageUrl}" alt="${imageAlt}" class="w-full h-48 object-cover" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+            ? `<img src="${imageUrl}" alt="${imageAlt}" class="card-image w-full h-48 object-cover" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">`
             : ""
         }
         <div class="w-full h-48 bg-gray-200 dark:bg-gray-700 ${
