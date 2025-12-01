@@ -204,9 +204,11 @@ function renderListing() {
 
           <div class="pt-4 border-t border-gray-200">
             <p class="text-sm text-gray-500">Seller</p>
-            <p class="text-lg font-semibold text-gray-800">${
-              currentListing.seller?.name || "Unknown"
-            }</p>
+            <a href="/pages/userProfile.html?username=${encodeURIComponent(
+              currentListing.seller?.name || "",
+            )}" class="text-lg font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 hover:underline">
+              ${currentListing.seller?.name || "Unknown"}
+            </a>
           </div>
         </div>
 

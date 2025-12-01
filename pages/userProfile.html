@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - Auction House</title>
+    <script
+      src="https://kit.fontawesome.com/3cc0008f2c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/src/styles/style.css" />
+    <script type="module" src="/src/js/pages/userProfile.js" defer></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navigation -->
+    <div id="main-nav"></div>
+
+    <!-- Profile Header -->
+    <div class="bg-white dark:bg-gray-800 shadow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Banner -->
+        <div
+          class="relative h-48 sm:h-64 bg-gradient-to-r from-primary-500 to-primary-700 rounded-b-lg overflow-hidden"
+        >
+          <img
+            id="banner-img"
+            src=""
+            alt="Profile Banner"
+            class="w-full h-full object-cover hidden"
+          />
+          <div
+            id="banner-placeholder"
+            class="w-full h-full flex items-center justify-center"
+          >
+            <i class="fas fa-image text-6xl text-white opacity-50"></i>
+          </div>
+        </div>
+        <!-- Profile Info -->
+        <div class="relative pb-6">
+          <div class="sm:flex sm:items-end sm:space-x-5">
+            <div class="flex -mt-16 sm:-mt-20">
+              <div class="relative">
+                <div
+                  class="h-24 w-24 sm:h-32 sm:w-32 rounded-full ring-4 ring-white dark:ring-gray-800 bg-gray-200 dark:bg-gray-700 overflow-hidden"
+                >
+                  <img
+                    id="avatar-img"
+                    src=""
+                    alt="Profile Avatar"
+                    class="w-full h-full object-cover hidden"
+                  />
+                  <div
+                    id="avatar-placeholder"
+                    class="w-full h-full flex items-center justify-center"
+                  >
+                    <i
+                      class="fas fa-user text-4xl sm:text-5xl text-gray-400"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-between sm:space-x-6 sm:pb-1"
+            >
+              <div class="flex-1 min-w-0">
+                <h1
+                  id="user-name"
+                  class="text-2xl font-bold text-gray-900 dark:text-white truncate"
+                >
+                  Loading...
+                </h1>
+                <p
+                  id="user-email"
+                  class="text-sm text-gray-500 dark:text-gray-400 mt-1"
+                >
+                  Loading...
+                </p>
+              </div>
+
+              <div class="mt-4 sm:mt-0">
+                <div
+                  class="bg-primary-50 dark:bg-primary-900/20 rounded-lg px-4 py-3 text-center"
+                >
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Credits
+                  </p>
+                  <p
+                    id="profile-user-credits"
+                    class="text-2xl font-bold text-primary-600 dark:text-primary-400"
+                  >
+                    0
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <p id="user-bio" class="text-gray-700 dark:text-gray-300">
+              No bio yet
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div class="border-b border-gray-200 dark:border-gray-700">
+        <nav class="-mb-px flex space-x-8">
+          <button
+            id="listings-tab"
+            class="border-primary-500 text-primary-600 dark:text-primary-400 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+          >
+            Listings
+            <span
+              id="listings-count"
+              class="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2.5 rounded-full text-xs"
+            >
+              0
+            </span>
+          </button>
+          <button
+            id="wins-tab"
+            class="border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+          >
+            Wins
+            <span
+              id="wins-count"
+              class="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2.5 rounded-full text-xs"
+            >
+              0
+            </span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Error Container -->
+      <div id="error-container" class="mt-4"></div>
+
+      <!-- Listings Tab Content -->
+      <div id="listings-content" class="mt-8">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+          Active Listings
+        </h2>
+        <div
+          id="user-listings-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <!-- Listings will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Wins Tab Content (hidden by default) -->
+      <div id="wins-content" class="mt-8 hidden">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+          Auction Wins
+        </h2>
+        <div
+          id="user-wins-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <!-- Wins will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+  </body>
+</html>

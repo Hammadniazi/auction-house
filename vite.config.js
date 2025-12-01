@@ -17,6 +17,7 @@ export default defineConfig({
         profile: resolve(__dirname, "pages/profile.html"),
         listing: resolve(__dirname, "pages/listing.html"),
         createListing: resolve(__dirname, "pages/create-listing.html"),
+        userProfile: resolve(__dirname, "pages/userProfile.html"),
       },
     },
   },
