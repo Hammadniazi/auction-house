@@ -28,6 +28,7 @@ async function loadListings() {
       sort: "created",
       sortOrder: "desc",
       _active: true,
+      _bids: true,
     });
 
     console.log("Api-response:", data);
