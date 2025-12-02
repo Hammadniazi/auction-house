@@ -3,14 +3,21 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "Auction house application with vanilla JavaScript and Tailwind CSS",
+  "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "test:ui": "playwright test --ui",
+    "test": "playwright test",
     "preview": "vite preview",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
+    "@vitest/ui": "^3.2.4",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
