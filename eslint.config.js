@@ -14,4 +14,23 @@ export default defineConfig([
       },
     },
   },
+  // Vitest test files
+  {
+    files: ["tests/**/*.{test,spec}.js", "tests/setup.js"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        vi: "readonly",
+        describe: "readonly",
+        it: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        test: "readonly",
+      },
+    },
+  },
 ]);
