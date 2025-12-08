@@ -8,8 +8,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test:ui": "playwright test --ui",
     "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:unit": "vitest",
+    "test:unit:ui": "vitest --ui",
+    "test:unit:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "preview": "vite preview",
     "prepare": "husky install"
   },
@@ -17,13 +21,16 @@
     "@eslint/js": "^9.39.1",
     "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
+    "@vitest/browser": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
+    "jsdom": "^27.0.1",
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
-    "vite": "^7.2.2"
+    "vite": "^7.2.2",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",

@@ -44,33 +44,68 @@ Navigate to: http://localhost:5173
 
 ## Testing
 
-This project includes comprehensive testing with Vitest and Playwright.
+This project includes comprehensive testing with both **Vitest** (unit tests) and **Playwright** (E2E tests).
 
-### Run Unit Tests
+### Unit Testing with Vitest
+
+Unit tests are located in `tests/unit/` and test individual functions and modules in isolation.
 
 ```bash
-npm test
+# Run unit tests once
+npm run test:unit:run
+
+# Run unit tests in watch mode (auto-rerun on changes)
+npm run test:unit
+
+# Run unit tests with UI interface
+npm run test:unit:ui
+
+# Generate coverage report
+npm run test:coverage
 ```
 
-### Run E2E Tests
+**Test Structure:**
+
+- `tests/setup.js` - Global setup with localStorage mock
+- `tests/unit/helpers.test.js` - Tests for utility functions (validation, formatting, etc.)
+- `tests/unit/auth.test.js` - Tests for authentication utilities
+
+**Technologies:**
+
+- Vitest - Fast unit test framework
+- jsdom - DOM environment for testing
+
+### End-to-End Testing with Playwright
+
+E2E tests are located in `tests/e2e/` and test full user workflows in a real browser.
 
 ```bash
-# Terminal 1 - Start dev server:
+# Start the dev server first
 npm run dev
 
-# Terminal 2 - Run E2E tests:
-npm run test:e2e
+# Then in another terminal, run E2E tests
+npm run test
 ```
 
-### Test Commands
+**Test Files:**
+
+- `tests/e2e/auth.spec.js` - Login, register, logout
+- `tests/e2e/homepage.spec.js` - Homepage functionality
+- `tests/e2e/listings.spec.js` - Listing details and creation
+- `tests/e2e/profile.spec.js` - User profile management
+
+### Available Test Commands
 
 ```bash
-npm test # Run unit tests
-npm run test:ui # Unit tests with UI
-npm run test:e2e # Run E2E tests
-npm run test:e2e:ui # E2E tests with UI
-npm run test:e2e:headed  # E2E tests in browser
-npm run test:all         # Run all tests
+# Unit tests
+npm run test:unit           # Watch mode (dev)
+npm run test:unit:run       # Run once
+npm run test:unit:ui        # Interactive UI
+npm run test:coverage       # With coverage report
+
+# E2E tests (Playwright)
+npm run test                # Run E2E tests
+npm run test:ui             # E2E with Playwright UI
 ```
 
 ## Project Structure
@@ -98,11 +133,15 @@ auction-house/
 │   └── styles/
 │       └── style.css               # Main stylesheet
 ├── tests/
-│   └── e2e/                        # Playwright E2E tests
-│       ├── auth.spec.js            # Authentication tests (login, register, logout)
-│       ├── homepage.spec.js        # Homepage tests
-│       ├── listings.spec.js        # Listing detail and create listing tests
-│       └── profile.spec.js         # User profile tests
+│   ├── unit/                       # Vitest unit tests
+│   │   ├── auth.test.js            # Authentication utility tests
+│   │   └── helpers.test.js         # Helper function tests
+│   ├── e2e/                        # Playwright E2E tests
+│   │   ├── auth.spec.js            # Authentication tests (login, register, logout)
+│   │   ├── homepage.spec.js        # Homepage tests
+│   │   ├── listings.spec.js        # Listing detail and create listing tests
+│   │   └── profile.spec.js         # User profile tests
+│   └── setup.js                    # Vitest global setup (localStorage mock)
 ├── .eslintcache                    # ESLint cache (gitignored)
 ├── .gitignore
 ├── .prettierrc                     # Prettier config
@@ -111,6 +150,7 @@ auction-house/
 ├── netlify.toml                    # Netlify deployment config
 ├── package.json                    # Dependencies and scripts
 ├── playwright.config.js            # Playwright test configuration
+├── vitest.config.js                # Vitest unit test configuration
 ├── README.md                       # This file
 └── vite.config.js                  # Vite configuration
 ```
