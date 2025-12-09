@@ -13,8 +13,8 @@ import {
 } from "../../src/js/utils/auth.js";
 
 // Mock the constants module
-vi.mock("../../src/js/config/constants.js", () => ({
-  STORTAGE_KEYS: {
+vi.mock("../../src/js/config/constants", () => ({
+  STORAGE_KEYS: {
     TOKEN: "auction_token",
     USER: "auction_user",
     API_KEY: "auction_api_key",

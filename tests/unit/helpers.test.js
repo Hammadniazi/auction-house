@@ -59,9 +59,9 @@ describe("helpers.js - Utility Functions", () => {
   });
 
   describe("formatTimeRemaining", () => {
-    it("should return 'Aution Ended' for past dates", () => {
+    it("should return 'Auction Ended' for past dates", () => {
       const pastDate = new Date(Date.now() - 1000);
-      expect(formatTimeRemaining(pastDate)).toBe("Aution Ended");
+      expect(formatTimeRemaining(pastDate)).toBe("Auction Ended");
     });
 
     it("should format days and hours for dates > 1 day away", () => {

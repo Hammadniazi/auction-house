@@ -13,7 +13,7 @@ export function renderFooter() {
     <div>
             <div class="flex items-center gap-2 mb-4">
               <i class="fas fa-gavel text-2xl text-primary-500"></i>
-              <span class="text-xl font-bold text-white">AuctionHouse</span>
+              <span class="text-xl font-bold text-white">Auction House</span>
             </div>
             <p class="text-sm text-gray-400">
               Your trusted platform for online auctions. Place bids, create listings, and discover amazing items.
