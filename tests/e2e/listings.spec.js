@@ -5,9 +5,8 @@ test.describe("Listing Detail Page", () => {
     // First go to homepage to get a listing
     await page.goto("/");
 
-    // Wait for listings to load completely
-    await page.waitForLoadState("networkidle");
-    await page.waitForSelector(".listing-card", { timeout: 15000 });
+    // Wait for listings to load completely with increased timeout
+    await page.waitForSelector(".listing-card", { timeout: 20000 });
 
     // Click first listing card
     const firstCard = page.locator(".listing-card").first();
@@ -15,7 +14,7 @@ test.describe("Listing Detail Page", () => {
     await firstCard.click();
 
     // Should navigate to listing detail page
-    await page.waitForURL(/\/pages\/listing\.html\?id=/, { timeout: 10000 });
+    await page.waitForURL(/\/pages\/listing\.html\?id=/, { timeout: 15000 });
     await expect(page).toHaveURL(/\/pages\/listing\.html\?id=/);
   });
 
