@@ -21,8 +21,15 @@
     <script type="module" src="/src/js/pages/index.js" defer></script>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Skip to main content link for keyboard users -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded"
+    >
+      Skip to main content
+    </a>
     <!-- Navigation -->
-    <nav id="main-nav"></nav>
+    <nav id="main-nav" role="navigation" aria-label="Main navigation"></nav>
     <!-- Hero Section -->
     <section
       class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:mask-b-to-primary-900 text-white py-12 sm:py-16 md:py-20"
@@ -37,14 +44,17 @@
       </div>
       <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex flex-col sm:flex-row gap-2">
+          <label for="search-input" class="sr-only">Search for listings</label>
           <input
             type="text"
             id="search-input"
             placeholder="Search for listings..."
+            aria-label="Search for listings"
             class="flex-1 w-full px-4 sm:px-6 py-3 sm:py-4 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-200 dark:border-gray-600 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary-300 placeholder-gray-500 dark:placeholder-gray-400"
           />
           <button
             id="search-btn"
+            aria-label="Search listings"
             class="btn-primary sm:absolute sm:right-2 sm:top-2"
           >
             Search
@@ -53,7 +63,10 @@
       </div>
     </section>
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <main
+      id="main-content"
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12"
+    >
       <div
         class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4"
       >
@@ -63,8 +76,10 @@
           Active Listing
         </h2>
         <div class="w-full sm:w-auto">
+          <label for="sort-select" class="sr-only">Sort listings</label>
           <select
             id="sort-select"
+            aria-label="Sort listings by"
             class="w-full bg-white border border-gray-300 dark:border-gray-600 sm:w-auto px-4 py-2 dark:bg-gray-700 dark:text-white text-gray-800 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           >
             <option value="created-desc">Newest First</option>
@@ -74,17 +89,29 @@
           </select>
         </div>
       </div>
-      <div id="error-container"></div>
+      <div
+        id="error-container"
+        role="alert"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
       <div
         id="listings-container"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        role="region"
+        aria-label="Auction listings"
       ></div>
       <!-- Pagination -->
-      <div id="pagination" class="mt-12 flex justify-center space-x-2">
+      <nav
+        id="pagination"
+        class="mt-12 flex justify-center space-x-2"
+        role="navigation"
+        aria-label="Pagination"
+      >
         <!-- Pagination button will load here -->
-      </div>
+      </nav>
     </main>
     <!-- Footer -->
-    <footer id="footer"></footer>
+    <footer id="footer" role="contentinfo"></footer>
   </body>
 </html>

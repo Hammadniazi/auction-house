@@ -6,6 +6,7 @@ A modern, full-featured auction platform built with vanilla JavaScript (ES6+) an
 
 - GitHub Repository: [https://github.com/Hammadniazi/auction-house](https://github.com/Hammadniazi/auction-house)
 - Live link: [https://auction-things.netlify.app/](https://auction-things.netlify.app/)
+- Figma Design: [https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=0-1&p=f&t=9cNTvorvfZCc4Q0J-0](https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=0-1&p=f&t=9cNTvorvfZCc4Q0J-0)
 
 ## Project overview
 
