@@ -1,5 +1,6 @@
 import { isAuthenticated, getUser, logout } from "../utils/auth.js";
 import { profileAPI } from "../api/api.js";
+import { renderDarkModeToggle } from "./darkmode.js";
 
 export function renderNavigation() {
   const nav = document.getElementById("main-nav");
@@ -152,6 +153,10 @@ export function renderNavigation() {
       }
     });
   }
+
+  // Render dark mode toggle buttons
+  renderDarkModeToggle("dark-mode-toggle-container");
+  renderDarkModeToggle("dark-mode-toggle-container-mobile");
 }
 
 //  Update user credits in the navigation
