@@ -16,10 +16,20 @@
     <script type="module" src="/src/js/pages/login.js" defer></script>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Skip to main content link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded"
+    >
+      Skip to main content
+    </a>
     <!-- Navigation -->
-    <nav id="main-nav"></nav>
+    <nav id="main-nav" role="navigation" aria-label="Main navigation"></nav>
     <!-- Login Form -->
-    <main class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <main
+      id="main-content"
+      class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    >
       <div class="max-w-md md:max-w-lg w-full space-y-8">
         <div>
           <h2
@@ -40,7 +50,12 @@
         <div
           class="bg-white dark:bg-gray-800 py-8 px-4 shadow-lg rounded-lg sm:px-10"
         >
-          <div id="error-container"></div>
+          <div
+            id="error-container"
+            role="alert"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
 
           <form id="login-form" class="space-y-6">
             <div>

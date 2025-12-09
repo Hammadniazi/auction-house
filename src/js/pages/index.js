@@ -35,11 +35,8 @@ async function loadListings() {
       _bids: true,
     });
 
-    console.log("Api-response:", data);
-
     allListings = data.data || [];
 
-    console.log("All listings:", allListings);
     filteredListings = [...allListings];
     resetPagination();
     sortListings(currentSort);

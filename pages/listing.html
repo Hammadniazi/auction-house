@@ -16,11 +16,26 @@
     <script type="module" src="/src/js/pages/listing.js" defer></script>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Skip to main content link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded"
+    >
+      Skip to main content
+    </a>
     <!-- Navigation -->
-    <nav id="main-nav"></nav>
+    <nav id="main-nav" role="navigation" aria-label="Main navigation"></nav>
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div id="error-container"></div>
+    <main
+      id="main-content"
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+    >
+      <div
+        id="error-container"
+        role="alert"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
 
       <div id="listing-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Loading state -->
@@ -38,35 +53,35 @@
     <!-- Edit/Delete Modal -->
     <div
       id="edit-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="edit-modal-title"
       class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
     >
       <div
         class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 max-w-3xl w-full mx-4 max-h-screen overdlow-y-auto"
       >
         <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-bold text-gray-800 dark:text-white">
+          <h3
+            id="edit-modal-title"
+            class="text-2xl font-bold text-gray-800 dark:text-white"
+          >
             Edit Listing
           </h3>
           <button
             id="close-edit-modal-btn"
+            aria-label="Close edit listing modal"
             class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           >
-            <svg
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <i class="fas fa-times text-xl" aria-hidden="true"></i>
           </button>
         </div>
-        <div id="modal-error-container"></div>
+        <div
+          id="modal-error-container"
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
         <form id="edit-listing-form" class="space-y-6">
           <div>
             <label
@@ -114,12 +129,18 @@
 
     <div
       id="delete-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-modal-title"
       class="fixed inset-0 bg-black bg-opacity-50 hidden item-center justify-center z-50"
     >
       <div
         class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 max-w-md w-full mx-4"
       >
-        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
+        <h3
+          id="delete-modal-title"
+          class="text-xl font-bold text-gray-800 dark:text-white mb-4"
+        >
           Delete Listing
         </h3>
         <p class="text-gray-600 dark:text-gray-400 mb-6">
@@ -138,6 +159,6 @@
       </div>
     </div>
     <!-- Footer -->
-    <footer id="footer"></footer>
+    <footer id="footer" role="contentinfo"></footer>
   </body>
 </html>

@@ -16,11 +16,21 @@
     <script type="module" src="/src/js/pages/create-listing.js" defer></script>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Skip to main content link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded"
+    >
+      Skip to main content
+    </a>
     <!-- Navigation -->
-    <nav id="main-nav"></nav>
+    <nav id="main-nav" role="navigation" aria-label="Main navigation"></nav>
 
     <!-- Main content -->
-    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main
+      id="main-content"
+      class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+    >
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">
           Create New Listing
@@ -31,7 +41,12 @@
       </div>
 
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-        <div id="error-container"></div>
+        <div
+          id="error-container"
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
 
         <form id="create-listing-form" class="space-y-6">
           <div>
@@ -155,6 +170,6 @@
       </div>
     </main>
     <!-- Footer -->
-    <footer id="footer"></footer>
+    <footer id="footer" role="contentinfo"></footer>
   </body>
 </html>

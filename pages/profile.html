@@ -16,8 +16,15 @@
     <link rel="stylesheet" href="/src/styles/style.css" />
   </head>
   <body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Skip to main content link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded"
+    >
+      Skip to main content
+    </a>
     <!-- Navigation -->
-    <nav id="main-nav"></nav>
+    <nav id="main-nav" role="navigation" aria-label="Main navigation"></nav>
 
     <!-- Profile Header -->
     <section class="relative">
@@ -33,27 +40,10 @@
           />
           <button
             id="edit-banner-btn"
+            aria-label="Change profile banner image"
             class="absolute bottom-4 right-4 bg-white dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition hidden"
           >
-            <svg
-              class="inline-block h-5 w-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
+            <i class="fas fa-camera inline-block mr-2" aria-hidden="true"></i>
             Change Banner
           </button>
         </div>
@@ -82,9 +72,10 @@
                 </div>
                 <button
                   id="edit-avatar-btn"
+                  aria-label="Edit profile avatar"
                   class="absolute bottom-0 right-0 bg-primary-600 text-white p-2 rounded-full shadow-lg hover:bg-primary-700 transition hidden"
                 >
-                  <i class="fas fa-camera"></i>
+                  <i class="fas fa-camera" aria-hidden="true"></i>
                 </button>
               </div>
 
@@ -132,21 +123,36 @@
     </section>
 
     <!-- Profile Content -->
-    <main class="max-w-7xl mx-auto px-4 sm-px-6 lg:px-8 py-8">
-      <div class="error-container"></div>
+    <main id="main-content" class="max-w-7xl mx-auto px-4 sm-px-6 lg:px-8 py-8">
+      <div
+        class="error-container"
+        role="alert"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
 
       <!-- Tabs -->
       <div class="mb-8">
         <div class="border-b border-gray-200 dark:border-gray-700">
-          <nav class="flex space-x-8">
+          <nav
+            class="flex space-x-8"
+            role="tablist"
+            aria-label="Profile sections"
+          >
             <button
               id="tab-listings"
+              role="tab"
+              aria-selected="true"
+              aria-controls="listings-section"
               class="tab-btn active py-4 px-1 border-b-2 font-medium text-sm"
             >
               My Listings
             </button>
             <button
               id="tab-bids"
+              role="tab"
+              aria-selected="false"
+              aria-controls="bids-section"
               class="tab-btn py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300"
             >
               My Bids
@@ -156,7 +162,7 @@
       </div>
 
       <!-- My Listings -->
-      <div id="listings-section">
+      <div id="listings-section" role="tabpanel" aria-labelledby="tab-listings">
         <div class="flex justify-between items-center mb-6">
           <h2 class="text-2xl font-bold text-gray-800 dark:text-white">
             My Listings
@@ -175,7 +181,12 @@
         </div>
       </div>
       <!-- My Bids -->
-      <div id="bids-section" class="hidden">
+      <div
+        id="bids-section"
+        class="hidden"
+        role="tabpanel"
+        aria-labelledby="tab-bids"
+      >
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
           My Bids
         </h2>
@@ -191,36 +202,36 @@
     <!--  Edit Profile Modal -->
     <div
       id="edit-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
       class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
     >
       <div
         class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto"
       >
         <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-bold text-gray-800 dark:text-white">
+          <h3
+            id="modal-title"
+            class="text-2xl font-bold text-gray-800 dark:text-white"
+          >
             Edit Profile
           </h3>
           <button
             id="close-modal-btn"
+            aria-label="Close edit profile modal"
             class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           >
-            <svg
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <i class="fas fa-times text-xl" aria-hidden="true"></i>
           </button>
         </div>
 
-        <div id="modal-error-container"></div>
+        <div
+          id="modal-error-container"
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
 
         <form id="edit-profile-form" class="space-y-6">
           <div>
@@ -324,6 +335,6 @@
       </div>
     </div>
     <!-- Footer -->
-    <footer id="footer"></footer>
+    <footer id="footer" role="contentinfo"></footer>
   </body>
 </html>
