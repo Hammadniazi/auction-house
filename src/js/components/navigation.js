@@ -5,12 +5,14 @@ export function renderNavigation() {
   const nav = document.getElementById("main-nav");
   if (!nav) return;
 
+  // Add classes to the nav element
+  nav.className = "bg-white dark:bg-gray-800 shadow-lg transition-colors";
+
   const isLoggedIn = isAuthenticated();
 
   nav.innerHTML = `
-<nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 transition-colors z-50">
- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-   <div class="flex justify-between h-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
           <!-- Logo -->
           <div class="flex items-center">
             <a href="/index.html" class="flex items-center">
@@ -66,7 +68,7 @@ export function renderNavigation() {
         </div>
       </div>
 
-       <!-- Mobile menu (hidden by default) -->
+      <!-- Mobile menu (hidden by default) -->
       <div id="mobile-menu" class="hidden md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1">
           <a href="/index.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium transition">
@@ -102,7 +104,6 @@ export function renderNavigation() {
         </div>
       </div>
     </div>
-
 `;
 
   //  Add logout event listener

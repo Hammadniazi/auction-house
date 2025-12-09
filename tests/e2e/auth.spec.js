@@ -71,7 +71,9 @@ test.describe("Authentication Flow", () => {
       // Wait for error message
       await page.waitForTimeout(500);
 
-      const errorMsg = page.locator("text=/@stud.noroff.no./i");
+      const errorMsg = page.locator(
+        "text=/Email must be end with @stud.noroff.no/i",
+      );
       await expect(errorMsg).toBeVisible({ timeout: 5000 });
     });
 

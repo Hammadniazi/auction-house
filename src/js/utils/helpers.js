@@ -84,7 +84,7 @@ export function formatTimeRemaining(endDate) {
   const time = getTimeRemaining(endDate);
 
   if (time.isExpired) {
-    return "Aution Ended";
+    return "Auction Ended";
   }
   if (time.days > 0) {
     return `${time.days}d ${time.hours}h`;
