@@ -6,7 +6,7 @@ test.describe("Homepage", () => {
   });
   test("should load homepage successfully", async ({ page }) => {
     //  check page title
-    await expect(page).toHaveTitle("Auction-house");
+    await expect(page).toHaveTitle("Auction House - Online Bidding Platform");
     // Check navigation is present
     const nav = page.locator("#main-nav");
     await expect(nav).toBeVisible();
