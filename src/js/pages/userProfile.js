@@ -4,6 +4,10 @@ import { profileAPI } from "../api/api.js";
 import { createListingCard } from "../components/listings";
 import { showError, clearMessages } from "../utils/helpers";
 import { isAuthenticated } from "../utils/auth.js";
+import { initDarkMode } from "../components/darkmode.js";
+
+// Initialize dark mode
+initDarkMode();
 
 // Check if user is logged in
 if (!isAuthenticated()) {

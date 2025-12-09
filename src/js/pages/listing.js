@@ -18,6 +18,10 @@ import {
   formatTimeRemaining,
 } from "../utils/helpers.js";
 import { renderFooter } from "../components/footer.js";
+import { initDarkMode } from "../components/darkmode.js";
+
+// Initialize dark mode
+initDarkMode();
 
 //  Initialize Navigation
 renderNavigation();

@@ -10,6 +10,10 @@ import {
   onPageChange,
 } from "../components/pagination.js";
 import { renderFooter } from "../components/footer.js";
+import { initDarkMode } from "../components/darkmode.js";
+
+// Initialize dark mode
+initDarkMode();
 
 // Initialize navigation
 renderNavigation();

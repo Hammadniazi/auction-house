@@ -63,7 +63,7 @@ export function renderPagination(containerId = "pagination") {
     paginationHTML += `
       <button 
         data-page="${currentPage - 1}"
-        class="pagination-btn px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-600 transition-colors"
+        class="pagination-btn px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-600 transition-colors shadow-sm"
         aria-label="Previous page"
       >
         <i class="fas fa-chevron-left"></i>
@@ -78,10 +78,10 @@ export function renderPagination(containerId = "pagination") {
     paginationHTML += `
       <button 
         data-page="${i}"
-        class="pagination-btn px-3 py-2 rounded-lg transition-colors ${
+        class="pagination-btn px-3 py-2 rounded-lg transition-colors shadow-sm ${
           isActive
-            ? "bg-primary-600 text-white font-bold"
-            : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-gray-600"
+            ? "bg-primary-600 text-white font-bold border border-primary-600"
+            : "bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-gray-600"
         }"
         ${isActive ? 'aria-current="page"' : ""}
       >
@@ -103,10 +103,10 @@ export function renderPagination(containerId = "pagination") {
       paginationHTML += `
         <button 
           data-page="${i}"
-          class="pagination-btn px-3 py-2 rounded-lg transition-colors ${
+          class="pagination-btn px-3 py-2 rounded-lg transition-colors shadow-sm ${
             isActive
-              ? "bg-primary-600 text-white font-bold"
-              : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-gray-600"
+              ? "bg-primary-600 text-white font-bold border border-primary-600"
+              : "bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-primary-50 dark:hover:bg-gray-600"
           }"
           ${isActive ? 'aria-current="page"' : ""}
         >
@@ -121,7 +121,7 @@ export function renderPagination(containerId = "pagination") {
     paginationHTML += `
       <button 
         data-page="${currentPage + 1}"
-        class="pagination-btn px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-600 transition-colors"
+        class="pagination-btn px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-600 transition-colors shadow-sm"
         aria-label="Next page"
       >
         <i class="fas fa-chevron-right"></i>

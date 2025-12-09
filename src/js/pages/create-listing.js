@@ -9,6 +9,10 @@ import {
   hideLoading,
 } from "../utils/helpers";
 import { renderFooter } from "../components/footer.js";
+import { initDarkMode } from "../components/darkmode.js";
+
+// Initialize dark mode
+initDarkMode();
 
 //  Require authentication
 if (!requireAuth()) {
