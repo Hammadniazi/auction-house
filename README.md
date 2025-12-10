@@ -10,6 +10,7 @@ A modern, full-featured auction platform built with vanilla JavaScript (ES6+) an
 - Figma Style Guide: [https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=97-744&t=zZGmswaPnF1G96kE-1](https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=97-744&t=zZGmswaPnF1G96kE-1)
 - Kanban Board: [https://github.com/users/Hammadniazi/projects/9/views/1](https://github.com/users/Hammadniazi/projects/9/views/1)
 - Gannt Chart: [https://github.com/users/Hammadniazi/projects/9/views/4?sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=237777340](https://github.com/users/Hammadniazi/projects/9/views/4?sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=237777340)
+- Project Report: [https://docs.google.com/document/d/1sWejSTMcBksLuJRJW1qEyQ_rVbc2DF5bTjS5aKSs878/edit?usp=sharing](https://docs.google.com/document/d/1sWejSTMcBksLuJRJW1qEyQ_rVbc2DF5bTjS5aKSs878/edit?usp=sharing)
 
 ## Project overview
 
