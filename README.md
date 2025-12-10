@@ -7,6 +7,9 @@ A modern, full-featured auction platform built with vanilla JavaScript (ES6+) an
 - GitHub Repository: [https://github.com/Hammadniazi/auction-house](https://github.com/Hammadniazi/auction-house)
 - Live link: [https://auction-things.netlify.app/](https://auction-things.netlify.app/)
 - Figma Design: [https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=0-1&p=f&t=9cNTvorvfZCc4Q0J-0](https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=0-1&p=f&t=9cNTvorvfZCc4Q0J-0)
+- Figma Style Guide: [https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=97-744&t=zZGmswaPnF1G96kE-1](https://www.figma.com/design/O0VnMJjD7ro4EPsVS5X4UJ/Action-House?node-id=97-744&t=zZGmswaPnF1G96kE-1)
+- Kanban Board: [https://github.com/users/Hammadniazi/projects/9/views/1](https://github.com/users/Hammadniazi/projects/9/views/1)
+- Gannt Chart: [https://github.com/users/Hammadniazi/projects/9/views/4?sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=237777340](https://github.com/users/Hammadniazi/projects/9/views/4?sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=237777340)
 
 ## Project overview
 
@@ -29,8 +32,7 @@ A modern, full-featured auction platform built with vanilla JavaScript (ES6+) an
 
 ```bash
 npm install
-# and install Playwright browsers (required for Playwright tests)
-npx playwright install
+
 ```
 
 2. Start the dev server
@@ -52,16 +54,9 @@ This project includes comprehensive testing with both **Vitest** (unit tests) an
 Unit tests are located in `tests/unit/` and test individual functions and modules in isolation.
 
 ```bash
-# Run unit tests once
 npm run test:unit:run
-
-# Run unit tests in watch mode (auto-rerun on changes)
 npm run test:unit
-
-# Run unit tests with UI interface
 npm run test:unit:ui
-
-# Generate coverage report
 npm run test:coverage
 ```
 
@@ -81,10 +76,7 @@ npm run test:coverage
 E2E tests are located in `tests/e2e/` and test full user workflows in a real browser.
 
 ```bash
-# Start the dev server first
 npm run dev
-
-# Then in another terminal, run E2E tests
 npm run test
 ```
 
@@ -99,14 +91,13 @@ npm run test
 
 ```bash
 # Unit tests
-npm run test:unit           # Watch mode (dev)
-npm run test:unit:run       # Run once
-npm run test:unit:ui        # Interactive UI
-npm run test:coverage       # With coverage report
+npm run test:unit
+npm run test:unit:run
+npm run test:unit:ui
 
 # E2E tests (Playwright)
-npm run test                # Run E2E tests
-npm run test:ui             # E2E with Playwright UI
+npm run test
+npm run test:ui
 ```
 
 ## Project Structure
@@ -115,45 +106,45 @@ npm run test:ui             # E2E with Playwright UI
 auction-house/
 ├── .github/
 │   └── workflows/
-│       └── playwright.yml          # GitHub Actions CI for E2E tests
-├── pages/                          # HTML pages for multi-page app
+│       └── playwright.yml
+├── pages/
 │   ├── create-listing.html
 │   ├── listing.html
 │   ├── login.html
 │   ├── profile.html
 │   ├── register.html
 │   └── userProfile.html
-├── public/                         # Static assets
+├── public/
 ├── src/
 │   ├── js/
-│   │   ├── api/                    # API client modules
-│   │   ├── components/             # Reusable UI components (navigation, footer, listings, etc.)
-│   │   ├── config/                 # App configuration (constants, etc.)
-│   │   ├── pages/                  # Page-specific JavaScript modules
-│   │   └── utils/                  # Utility functions (auth, helpers, etc.)
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── config/
+│   │   ├── pages/
+│   │   └── utils/
 │   └── styles/
-│       └── style.css               # Main stylesheet
+│       └── style.css
 ├── tests/
-│   ├── unit/                       # Vitest unit tests
-│   │   ├── auth.test.js            # Authentication utility tests
-│   │   └── helpers.test.js         # Helper function tests
-│   ├── e2e/                        # Playwright E2E tests
-│   │   ├── auth.spec.js            # Authentication tests (login, register, logout)
-│   │   ├── homepage.spec.js        # Homepage tests
-│   │   ├── listings.spec.js        # Listing detail and create listing tests
-│   │   └── profile.spec.js         # User profile tests
-│   └── setup.js                    # Vitest global setup (localStorage mock)
-├── .eslintcache                    # ESLint cache (gitignored)
+│   ├── unit/
+│   │   ├── auth.test.js
+│   │   └── helpers.test.js
+│   ├── e2e/
+│   │   ├── auth.spec.js
+│   │   ├── homepage.spec.js
+│   │   ├── listings.spec.js
+│   │   └── profile.spec.js
+│   └── setup.js
+├── .eslintcache
 ├── .gitignore
-├── .prettierrc                     # Prettier config
-├── eslint.config.js                # ESLint configuration
-├── index.html                      # Main entry point
-├── netlify.toml                    # Netlify deployment config
-├── package.json                    # Dependencies and scripts
-├── playwright.config.js            # Playwright test configuration
-├── vitest.config.js                # Vitest unit test configuration
-├── README.md                       # This file
-└── vite.config.js                  # Vite configuration
+├── .prettierrc
+├── eslint.config.js
+├── index.html
+├── netlify.toml
+├── package.json
+├── playwright.config.js
+├── vitest.config.js
+├── README.md
+└── vite.config.js
 ```
 
 ## API
