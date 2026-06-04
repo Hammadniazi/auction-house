@@ -3,25 +3,30 @@ import {
   getTimeRemaining,
   getHighestBid,
   truncateText,
+  escapeHtml,
+  sanitizeUrl,
 } from "../utils/helpers.js";
 
 // Create a listing card component
 export function createListingCard(listing) {
-  const imageUrl = listing.media?.[0]?.url || "";
-  const imageAlt = listing.media?.[0]?.alt || listing.title;
+  const imageUrl = sanitizeUrl(listing.media?.[0]?.url || "", "");
+  const imageAlt = escapeHtml(listing.media?.[0]?.alt || listing.title);
   const timeData = getTimeRemaining(listing.endsAt);
   const isExpired = timeData.isExpired;
   const timeRemainingText = formatTimeRemaining(listing.endsAt);
   const highestBid = getHighestBid(listing.bids);
+  const safeTitle = escapeHtml(listing.title);
+  const safeDescription = escapeHtml(
+    truncateText(listing.description || "No description provided", 100),
+  );
+  const listingUrl = `/pages/listing.html?id=${encodeURIComponent(listing.id)}`;
 
   return `
-  <div class="listing-card" onclick="window.location.href='/pages/listing.html?id=${
-    listing.id
-  }'">
+  <div class="listing-card" onclick="window.location.href='${listingUrl}'">
       <div class="image-container relative">
         ${
           imageUrl
-            ? `<img src="${imageUrl}" alt="${imageAlt}" class="card-image w-full h-48 object-cover" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+            ? `<img src="${escapeHtml(imageUrl)}" alt="${imageAlt}" class="card-image w-full h-48 object-cover" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">`
             : ""
         }
         <div class="w-full h-48 bg-gray-200 dark:bg-gray-700 ${
@@ -39,13 +44,8 @@ export function createListingCard(listing) {
         }
       </div>
       <div class="p-4">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 truncate">${
-          listing.title
-        }</h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">${truncateText(
-          listing.description || "No description provided",
-          100,
-        )}</p>
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2 truncate">${safeTitle}</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">${safeDescription}</p>
         <div class="flex justify-between items-center">
           <div>
             <p class="text-xs text-gray-500 dark:text-gray-400">Current Bid</p>
