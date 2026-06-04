@@ -16,6 +16,8 @@ import {
   getHighestBid,
   getTimeRemaining,
   formatTimeRemaining,
+  escapeHtml,
+  sanitizeUrl,
 } from "../utils/helpers.js";
 import { renderFooter } from "../components/footer.js";
 import { initDarkMode } from "../components/darkmode.js";
@@ -73,7 +75,18 @@ function renderListing() {
     currentListing.media && currentListing.media.length > 0
       ? currentListing.media
       : [];
+  const safeImages = images.map((img) => ({
+    url: sanitizeUrl(img.url, ""),
+    alt: escapeHtml(img.alt || currentListing.title),
+  }));
   const hasImages = images.length > 0;
+  const safeDescription = escapeHtml(
+    currentListing.description || "No description provided",
+  );
+  const safeTitle = escapeHtml(currentListing.title);
+  const safeSellerName = escapeHtml(currentListing.seller?.name || "Unknown");
+  const sellerUsername = encodeURIComponent(currentListing.seller?.name || "");
+
   container.innerHTML = `
    <!-- Image Gallery -->
     <div class="lg:col-span-2">
@@ -81,8 +94,8 @@ function renderListing() {
         ${
           hasImages
             ? `
-        <img id="main-image" src="${images[0].url}" alt="${
-          images[0].alt || currentListing.title
+        <img id="main-image" src="${escapeHtml(safeImages[0].url)}" alt="${
+          safeImages[0].alt
         }" class="w-full h-96 object-cover" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="w-full h-96 bg-gray-200 dark:bg-gray-700 hidden items-center justify-center">
           <div class="text-center">
@@ -101,22 +114,18 @@ function renderListing() {
         `
         }
         ${
-          images.length > 1
+          safeImages.length > 1
             ? `
           <div class="p-4 grid grid-cols-4 gap-2">
-            ${images
+            ${safeImages
               .map(
                 (img, index) => `
               <div class="relative">
-                <img src="${img.url}" alt="${img.alt || currentListing.title}" 
+                <img src="${escapeHtml(img.url)}" alt="${img.alt}" 
                    class="w-full h-20 object-cover rounded cursor-pointer hover:opacity-75 transition ${
                      index === 0 ? "ring-2 ring-primary-600" : ""
                    }"
-                   onclick="document.getElementById('main-image').src='${
-                     img.url
-                   }'; 
-                            document.querySelectorAll('.h-20').forEach(el => el.parentElement.classList.remove('ring-2', 'ring-primary-600'));
-                            this.parentElement.classList.add('ring-2', 'ring-primary-600');"
+                   data-main-image-url="${escapeHtml(img.url)}"
                    onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="absolute inset-0 bg-gray-300 dark:bg-gray-600 hidden items-center justify-center rounded">
                   <i class="fas fa-image text-gray-500 dark:text-gray-400"></i>
@@ -134,9 +143,7 @@ function renderListing() {
       <!-- Description -->
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-6">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Description</h2>
-        <p class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">${
-          currentListing.description || "No description provided"
-        }</p>
+        <p class="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">${safeDescription}</p>
         
         ${
           currentListing.tags && currentListing.tags.length > 0
@@ -147,7 +154,7 @@ function renderListing() {
               ${currentListing.tags
                 .map(
                   (tag) => `
-                <span class="badge-info">${tag}</span>
+                <span class="badge-info">${escapeHtml(tag)}</span>
               `,
                 )
                 .join("")}
@@ -177,9 +184,7 @@ function renderListing() {
           }
         </div>
 
-        <h1 class="text-3xl font-bold text-gray-800 mb-4">${
-          currentListing.title
-        }</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">${safeTitle}</h1>
 
         <div class="space-y-4 mb-6">
           <div>
@@ -208,10 +213,8 @@ function renderListing() {
 
           <div class="pt-4 border-t border-gray-200">
             <p class="text-sm text-gray-500">Seller</p>
-            <a href="/pages/userProfile.html?username=${encodeURIComponent(
-              currentListing.seller?.name || "",
-            )}" class="text-lg font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 hover:underline">
-              ${currentListing.seller?.name || "Unknown"}
+            <a href="/pages/userProfile.html?username=${sellerUsername}" class="text-lg font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 hover:underline">
+              ${safeSellerName}
             </a>
           </div>
         </div>
@@ -274,6 +277,25 @@ function renderListing() {
        
        `;
 
+  const thumbnailImages = container.querySelectorAll("[data-main-image-url]");
+  if (thumbnailImages.length > 0) {
+    thumbnailImages.forEach((thumbnail) => {
+      thumbnail.addEventListener("click", () => {
+        const mainImage = document.getElementById("main-image");
+        if (!mainImage) return;
+
+        const nextImageUrl = thumbnail.dataset.mainImageUrl;
+        if (!nextImageUrl) return;
+
+        mainImage.src = nextImageUrl;
+        thumbnailImages.forEach((img) => {
+          img.parentElement?.classList.remove("ring-2", "ring-primary-600");
+        });
+        thumbnail.parentElement?.classList.add("ring-2", "ring-primary-600");
+      });
+    });
+  }
+
   // Add event listeners
   if (canBid) {
     document
@@ -318,9 +340,9 @@ function renderBidHistory() {
           index === 0 ? "ring-2 ring-primary-300" : ""
         }">
           <div>
-            <p class="font-semibold text-gray-800">${
-              bid.bidder?.name || "Anonymous"
-            }</p>
+            <p class="font-semibold text-gray-800">${escapeHtml(
+              bid.bidder?.name || "Anonymous",
+            )}</p>
             <p class="text-xs text-gray-500">${formatDate(bid.created)}</p>
           </div>
           <div class="text-right">

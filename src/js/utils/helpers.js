@@ -2,16 +2,44 @@
 export function validateEmail(email) {
   return email.endsWith("@stud.noroff.no");
 }
-4;
+
+// Escape user-controlled text before injecting into HTML templates
+export function escapeHtml(value) {
+  const text = String(value ?? "");
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// Restrict URLs to safe protocols used by the app
+export function sanitizeUrl(url, fallback = "") {
+  if (!url) return fallback;
+
+  try {
+    const parsedUrl = new URL(url, "http://localhost");
+    if (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") {
+      return parsedUrl.href;
+    }
+  } catch {
+    // Ignore invalid URL and fall back
+  }
+
+  return fallback;
+}
 
 // Display error message
 
 export function showError(message, containerId = "error-container") {
   const container = document.getElementById(containerId);
   if (container) {
+    const safeMessage = escapeHtml(message);
     container.innerHTML = `
         <div class= "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-        <span class="block sm:inline">${message}</span>
+        <span class="block sm:inline">${safeMessage}</span>
+        </div>
         `;
     container.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -52,9 +80,10 @@ export function hideLoading(element) {
 export function showSuccess(message, containerId = "error-container") {
   const container = document.getElementById(containerId);
   if (container) {
+    const safeMessage = escapeHtml(message);
     container.innerHTML = `
           <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
-        <span class="block sm:inline">${message}</span>
+        <span class="block sm:inline">${safeMessage}</span>
       </div>
       `;
     container.scrollIntoView({ behavior: "smooth", block: "center" });
